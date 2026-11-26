@@ -1,56 +1,45 @@
-# FORESTGUARD — Simulador académico de vigilancia forestal
+# ECOFRACTAL — Laboratorio de Diseño Arquitectónico Fractal
 
-FORESTGUARD es una aplicación web estática para explorar cómo distribuir sensores ambientales en un terreno mediante patrones fractales y conceptos de Matemática Discreta.
-
-## Cómo abrirlo
-
-1. Descarga o clona este repositorio.
-2. Abre `index.html` en un navegador moderno, o publica los archivos con GitHub Pages.
-3. Para utilizar el mapa interactivo necesitas conexión a internet (usa Leaflet y OpenStreetMap).
-
-## Módulos
-
-- **Panel general:** indicadores y resumen de la simulación.
-- **Imagen y mapa real:** carga una fotografía aérea o satelital desde tu dispositivo, marca manualmente puntos de riesgo, visualiza los sensores sobre la imagen, explora un mapa OpenStreetMap, selecciona coordenadas o solicita tu ubicación con permiso del navegador.
-- **Configuración del bosque:** dimensiones, sensores disponibles, presupuesto, riesgo y alcance.
-- **Simulador de fractales:** árbol fractal, triángulo de Sierpinski y cuadrícula fractal con niveles de recursividad y tablas de recurrencia.
-- **Distribución de sensores:** distribución por patrón, inspección de nodos, vecino más cercano y grafo de conexiones.
-- **Análisis de cobertura:** estimación de sectores cubiertos y sin cobertura.
-- **Presupuesto y resultados:** costo referencial y comparación de patrones.
-
-## Matemática Discreta
-
-- Recursividad para generar patrones fractales.
-- Recurrencias para expresar el crecimiento de los patrones.
-- Árboles para representar llamadas recursivas.
-- Grafos `G = (V, E)` para modelar sensores y conexiones.
-- Distancia euclidiana para encontrar el sensor más cercano.
-
-## Uso del módulo de imagen y mapa
-
-1. En el menú, entra en **Imagen y mapa real**.
-2. Pulsa **Seleccionar imagen del bosque** y elige una foto JPG, PNG o WEBP.
-3. Activa **Marcar zonas de riesgo** y toca la imagen para agregar marcas rojas. Estas marcas son manuales; no hay reconocimiento automático de incendios.
-4. Los puntos verdes muestran la distribución simulada de sensores. Para cambiarla, entra a **Distribución de sensores** y vuelve a distribuirlos.
-5. En el mapa, haz clic para seleccionar coordenadas. El botón **Usar mi ubicación** solicita permiso de geolocalización al navegador.
+Aplicación web estática para GitHub Pages. Permite diseñar una estructura conceptual con curva de Koch, paneles triangulares de Sierpinski y soportes ramificados, visualizarla en 3D y explorar estimaciones solares y de ventilación.
 
 ## Publicar en GitHub Pages
 
-Sube `index.html`, `styles.css`, `script.js` y `README.md` directamente a la raíz del repositorio. En **Settings → Pages**, selecciona **Deploy from a branch**, rama `main` y carpeta `/ (root)`.
+1. Descarga y descomprime el ZIP.
+2. Sube **todo el contenido** de esta carpeta al repositorio (incluidos `styles.css` y `app.js`).
+3. Los archivos `index.html`, `styles.css` y `app.js` deben quedar en la raíz del repositorio.
+4. En GitHub abre **Settings → Pages**.
+5. En **Build and deployment**, elige **Deploy from a branch**, rama `main`, carpeta `/ (root)` y guarda.
+6. Espera a que termine la publicación.
 
-## Tecnologías
+No requiere npm, Node ni compilación. Three.js se carga desde un CDN, por lo que la visualización 3D requiere conexión a internet.
 
-HTML5, CSS3, JavaScript, SVG, Canvas, [Leaflet](https://leafletjs.com/) y [OpenStreetMap](https://www.openstreetmap.org/).
+## Funciones implementadas
+
+- Diseñador 3D con órbita, zoom, vistas superior/frontal/lateral y ajustes de dimensiones.
+- Cubierta conceptual con contorno Koch recursivo.
+- Paneles formados por triángulos Sierpinski separados físicamente en la geometría 3D.
+- Soportes ramificados recursivos.
+- Control de iteraciones y parámetros.
+- Estimación solar con fecha, latitud y hora; luz direccional y sombra proyectada en la escena.
+- Estimación de sombra mediante una función geométrica simplificada.
+- Estimación de caudal a través de aberturas con Q = Cd·A·√(2ΔP/ρ).
+- Comparador de tres alternativas.
+- Explorador de alternativas con puntuación ponderada.
+- Guardado local, importación/exportación JSON, CSV e informe imprimible (Guardar como PDF).
+- Laboratorio matemático y visualizaciones 2D de fractales.
 
 ## Limitaciones importantes
 
-- Es un simulador académico; no detecta incendios reales ni reemplaza equipos de monitoreo forestal.
-- La imagen cargada no se analiza automáticamente. El usuario coloca las marcas de riesgo manualmente.
-- Los sensores se dibujan como una distribución matemática sobre la imagen; no son dispositivos físicos ni ubicaciones GPS calibradas.
-- El mapa muestra cartografía de OpenStreetMap, no imágenes satelitales. La geolocalización depende del permiso del navegador y normalmente requiere HTTPS (GitHub Pages lo proporciona).
-- Los datos y las imágenes cargadas no se guardan en un servidor; la imagen se mantiene en memoria del navegador durante la sesión.
-- Los valores de riesgo y costos son referenciales y configurables.
+Esta es una herramienta conceptual educativa, no un software de ingeniería:
+- La cubierta Koch se genera como contorno cerrado extruido, pero no se verifica fabricación, estabilidad ni uniones.
+- Los paneles Sierpinski son geometría de triángulos sólidos separados, no un análisis de resistencia de una placa real.
+- Las columnas ramificadas son formas geométricas; no validan cargas ni pandeo.
+- El cálculo de sombra porcentual es una estimación simplificada; la escena 3D muestra la dirección de luz y sombras, pero no realiza una integración profesional de irradiancia.
+- El modelo de ventilación estima caudal por aberturas. No es CFD y no resuelve el flujo alrededor del refugio.
+- No se calcula confort térmico profesional, temperatura superficial ni sensación térmica.
+- Los proyectos se guardan en el almacenamiento local del navegador, no en una cuenta o servidor.
+- El PDF se genera mediante la función de impresión del navegador.
 
+## Tecnologías
 
-## Imagen incluida
-La carpeta `assets/` contiene `forest-default.png`, una imagen aérea de demostración que se muestra automáticamente en el panel y en el módulo de terreno. Mantén la carpeta `assets` junto a `index.html`, `styles.css` y `script.js` al subir el proyecto a GitHub.
+HTML, CSS, JavaScript ES Modules, Three.js y OrbitControls desde CDN. Los fractales 2D se dibujan con Canvas.
