@@ -42,7 +42,7 @@
       </header>
 
       <section class="view active" id="view-dashboard">
-        <div class="welcome-row"><div><div class="eyebrow green">MONITOREO INTELIGENTE DE ECOSISTEMAS</div><h2>Protege el bosque con <em>matemática.</em></h2><p>Explora patrones fractales y diseña una distribución estratégica de sensores ambientales.</p></div><button class="primary-btn" data-goto="forest">Configurar simulación <b>→</b></button></div>
+        <div class="welcome-row"><div class="welcome-copy"><div class="eyebrow green">MONITOREO INTELIGENTE DE ECOSISTEMAS</div><h2>Protege el bosque con <em>matemática.</em></h2><p>Explora un bosque de ejemplo, visualiza sensores y diseña una distribución estratégica con patrones fractales.</p><button class="primary-btn" data-goto="terrain">Explorar bosque <b>→</b></button></div><div class="welcome-forest-image"><img src="assets/forest-default.png" alt="Vista aérea de un bosque tropical"><span>TERRENO DE DEMOSTRACIÓN · BOSQUE TROPICAL</span></div></div>
         <div class="stats-grid">
           <article class="stat-card"><div class="stat-top"><span>Sensores activos</span><span class="stat-icon">⌖</span></div><strong id="dashSensors">24</strong><small id="dashSensorSub">Distribuidos en el terreno</small></article>
           <article class="stat-card"><div class="stat-top"><span>Cobertura estimada</span><span class="stat-icon">◉</span></div><strong id="dashCoverage">--%</strong><small>Superficie vigilada</small></article>
@@ -57,18 +57,18 @@
       </section>
 
       <section class="view" id="view-terrain">
-        <div class="section-intro"><div><span class="eyebrow green">MÓDULO DE TERRENO REAL</span><h2>Explora tu zona forestal</h2><p>Sube una imagen aérea para ubicar sensores o selecciona una ubicación en el mapa.</p></div><span class="step-chip">NUEVO</span></div>
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO DE TERRENO VISUAL</span><h2>Explora el bosque</h2><p>La página ya incluye una imagen aérea de demostración con sensores y zonas de riesgo simuladas. Puedes cambiarla si lo deseas.</p></div><span class="step-chip">BOSQUE INCLUIDO</span></div>
         <div class="terrain-grid">
           <article class="panel terrain-panel">
-            <div class="panel-heading"><div><span class="eyebrow">MODO 01 · IMAGEN PROPIA</span><h3>Analizar una fotografía</h3><p>Admite fotografías aéreas, capturas satelitales o imágenes del terreno.</p></div><span class="panel-symbol">▧</span></div>
-            <label class="upload-zone" for="forestImageInput"><span class="upload-icon">＋</span><b>Seleccionar imagen del bosque</b><small>JPG, PNG o WEBP · La imagen se procesa en tu navegador</small><input id="forestImageInput" type="file" accept="image/png,image/jpeg,image/webp"></label>
+            <div class="panel-heading"><div><span class="eyebrow">MODO 01 · BOSQUE DE DEMOSTRACIÓN</span><h3>Imagen aérea del terreno</h3><p>Esta imagen ya viene incluida en FORESTGUARD. Los marcadores muestran un ejemplo de vigilancia.</p></div><span class="panel-symbol">▧</span></div>
+            <label class="upload-zone optional-upload" for="forestImageInput"><span class="upload-icon">＋</span><b>Opcional: usar otra imagen</b><small>Solo si deseas reemplazar el bosque de demostración</small><input id="forestImageInput" type="file" accept="image/png,image/jpeg,image/webp"></label>
             <div class="image-toolbar"><label class="check-control"><input type="checkbox" id="riskMarkMode"> Marcar zonas de riesgo al tocar la imagen</label><button class="small-btn" id="clearRiskMarks" type="button">Limpiar marcas</button></div>
-            <div class="uploaded-stage" id="uploadedStage"><div class="empty-upload"><span>🌲</span><b>Tu imagen aparecerá aquí</b><small>Después podrás seleccionar puntos de riesgo y ver la ubicación simulada de los sensores.</small></div><svg id="uploadedOverlay" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-label="Imagen del bosque con puntos de análisis"><image id="uploadedImage" x="0" y="0" width="1000" height="620" preserveAspectRatio="none"/><g id="riskMarkers"></g><g id="imageSensorMarkers"></g></svg></div>
+            <div class="uploaded-stage" id="uploadedStage"><div class="empty-upload"><span>🌲</span><b>Cargando bosque de demostración…</b><small>La imagen incluida aparecerá aquí automáticamente.</small></div><svg id="uploadedOverlay" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-label="Imagen del bosque con puntos de análisis"><image id="uploadedImage" x="0" y="0" width="1000" height="620" preserveAspectRatio="none"/><g id="riskMarkers"></g><g id="imageSensorMarkers"></g></svg></div>
             <div class="map-legend"><span><i class="dot covered"></i> Sensores</span><span><i class="dot high"></i> Zonas marcadas como riesgo</span></div>
-            <p class="terrain-note" id="imageStatus">La imagen no se envía a ningún servidor; se visualiza localmente en este navegador.</p>
+            <p class="terrain-note" id="imageStatus">Bosque de demostración incluido. Los puntos de riesgo y sensores son ejemplos simulados, no detecciones automáticas.</p>
           </article>
           <article class="panel terrain-panel">
-            <div class="panel-heading"><div><span class="eyebrow">MODO 02 · MAPA INTERACTIVO</span><h3>Explorar una ubicación</h3><p>Haz clic en el mapa para elegir un punto de referencia.</p></div><span class="panel-symbol">◎</span></div>
+            <div class="panel-heading"><div><span class="eyebrow">MODO 02 · MAPA INTERACTIVO</span><h3>Explorar una ubicación</h3><p>El mapa inicia mostrando una zona de referencia en la Amazonía peruana. Puedes moverlo y elegir otro punto.</p></div><span class="panel-symbol">◎</span></div>
             <div class="map-actions"><button class="small-btn" id="locateMe" type="button">◎ Usar mi ubicación</button><button class="small-btn" id="resetMapView" type="button">Restablecer mapa</button></div>
             <div id="realMap" class="real-map" role="application" aria-label="Mapa interactivo de OpenStreetMap"></div>
             <div class="coordinates-card"><div><small>UBICACIÓN SELECCIONADA</small><b id="selectedCoordinates">Haz clic en el mapa</b></div><button class="small-btn" id="copyCoordinates" type="button" disabled>Copiar</button></div>

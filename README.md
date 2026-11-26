@@ -50,3 +50,7 @@ HTML5, CSS3, JavaScript, SVG, Canvas, [Leaflet](https://leafletjs.com/) y [OpenS
 - El mapa muestra cartografía de OpenStreetMap, no imágenes satelitales. La geolocalización depende del permiso del navegador y normalmente requiere HTTPS (GitHub Pages lo proporciona).
 - Los datos y las imágenes cargadas no se guardan en un servidor; la imagen se mantiene en memoria del navegador durante la sesión.
 - Los valores de riesgo y costos son referenciales y configurables.
+
+
+## Imagen incluida
+La carpeta `assets/` contiene `forest-default.png`, una imagen aérea de demostración que se muestra automáticamente en el panel y en el módulo de terreno. Mantén la carpeta `assets` junto a `index.html`, `styles.css` y `script.js` al subir el proyecto a GitHub.
