@@ -1,132 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123c35">
-  <title>ECOFRACTAL | Laboratorio de Diseño Arquitectónico Fractal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b2d">
+  <title>FORESTGUARD | Simulador de prevención forestal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
-<div class="app-shell">
-  <aside class="sidebar" id="sidebar">
-    <div class="brand"><div class="brand-mark">E<span>F</span></div><div><b>ECOFRACTAL</b><small>LABORATORIO DE DISEÑO</small></div></div>
-    <div class="project-chip"><span class="dot"></span><div><small>PROYECTO ACTIVO</small><b id="projectNameSide">Refugio BioSombra</b></div></div>
-    <nav id="mainNav">
-      <button class="nav-item active" data-page="inicio"><span>⌂</span> Inicio</button>
-      <button class="nav-item" data-page="proyectos"><span>▦</span> Mis proyectos</button>
-      <div class="nav-label">DISEÑO</div>
-      <button class="nav-item" data-page="disenador"><span>◇</span> Diseñador 3D</button>
-      <button class="nav-item" data-page="fractales"><span>✳</span> Generador de fractales</button>
-      <div class="nav-label">SIMULACIÓN</div>
-      <button class="nav-item" data-page="solar"><span>☼</span> Simulador solar</button>
-      <button class="nav-item" data-page="ventilacion"><span>≋</span> Ventilación</button>
-      <button class="nav-item" data-page="confort"><span>◉</span> Confort ambiental</button>
-      <div class="nav-label">EVALUACIÓN</div>
-      <button class="nav-item" data-page="comparador"><span>⇄</span> Comparador</button>
-      <button class="nav-item" data-page="optimizador"><span>✧</span> Optimizador</button>
-      <button class="nav-item" data-page="laboratorio"><span>∑</span> Laboratorio matemático</button>
-      <button class="nav-item" data-page="informes"><span>▤</span> Informes</button>
-    </nav>
-    <div class="sidebar-foot"><div class="avatar">EF</div><div><b>Modo laboratorio</b><small>Versión conceptual 1.0</small></div></div>
-  </aside>
-
-  <main class="main">
-    <header class="topbar">
-      <button class="mobile-menu" id="menuBtn">☰</button>
-      <div><div class="eyebrow" id="crumb">ESPACIO DE TRABAJO</div><h1 id="pageTitle">Diseña con patrones de la naturaleza</h1></div>
-      <div class="top-actions"><span class="saved-state" id="saveState">● Cambios locales</span><button class="btn btn-outline" id="saveBtn">Guardar proyecto</button><button class="btn btn-primary" id="reportTop">Exportar informe ↗</button></div>
-    </header>
-
-    <section class="page active" id="page-inicio">
-      <div class="hero">
-        <div class="hero-copy"><span class="pill">GEOMETRÍA + ARQUITECTURA SOSTENIBLE</span><h2>Diseña estructuras<br><em>inspiradas en la naturaleza.</em></h2><p>Explora cubiertas fractales, paneles perforados y soportes ramificados. Observa sus sombras y estudia su ventilación antes de convertir tus ideas en un proyecto.</p><div class="hero-actions"><button class="btn btn-light" data-goto="disenador">Comenzar a diseñar <b>→</b></button><button class="btn btn-ghost" data-goto="laboratorio">Explorar laboratorio</button></div><div class="hero-note"><span>✦</span> Proyecto de ejemplo precargado · editable</div></div>
-        <div class="hero-art"><div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div><div class="art-core">E<br><small>F</small></div><div class="art-caption">GEOMETRÍA<br>QUE RESPIRA</div><div class="art-stat"><b>03</b><small>FRACTALES<br>COMBINABLES</small></div></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="FORESTGUARD inicio">
+        <span class="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 10 22h8L7 35h13v9h8v-9h13L30 22h8L24 4Z" fill="currentColor"/><path d="M24 15v26" stroke="#d7f3df" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="11" r="2" fill="#f4a261"/></svg></span>
+        <span><strong>FOREST<span>GUARD</span></strong><small>SMART FOREST LAB</small></span>
+      </a>
+      <div class="side-label">PLATAFORMA</div>
+      <nav class="navigation" aria-label="Navegación principal">
+        <button class="nav-item active" data-view="dashboard"><span>◫</span> Panel general</button>
+        <button class="nav-item" data-view="terrain"><span>⌖</span> Imagen y mapa real</button>
+        <button class="nav-item" data-view="forest"><span>▧</span> Configuración del bosque</button>
+        <button class="nav-item" data-view="fractals"><span>✳</span> Simulador de fractales</button>
+        <button class="nav-item" data-view="sensors"><span>⌖</span> Distribución de sensores</button>
+        <button class="nav-item" data-view="coverage"><span>▦</span> Análisis de cobertura</button>
+        <button class="nav-item" data-view="budget"><span>◷</span> Presupuesto y resultados</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="status-card"><span class="pulse"></span><div><b>Simulación local</b><small>Datos generados en tu navegador</small></div></div>
+        <div class="side-foot">FORESTGUARD v1.0<br>Proyecto académico · Matemática Discreta</div>
       </div>
-      <div class="section-head"><div><span class="eyebrow">TU ESPACIO CREATIVO</span><h2>Un laboratorio para experimentar</h2></div><button class="text-btn" data-goto="proyectos">Ver proyectos →</button></div>
-      <div class="feature-grid">
-        <article class="feature-card"><div class="feature-icon green">◇</div><h3>Diseño tridimensional</h3><p>Modifica dimensiones, cubierta, soportes y materiales en una escena 3D interactiva.</p><button data-goto="disenador">Abrir diseñador ↗</button></article>
-        <article class="feature-card"><div class="feature-icon yellow">✳</div><h3>Generación fractal</h3><p>Construye una cubierta Koch, paneles Sierpinski y columnas de árbol fractal.</p><button data-goto="fractales">Crear geometrías ↗</button></article>
-        <article class="feature-card"><div class="feature-icon blue">☼</div><h3>Simulaciones ambientales</h3><p>Estudia sombras solares y estima el paso del aire mediante modelos simplificados.</p><button data-goto="solar">Simular entorno ↗</button></article>
-      </div>
-      <div class="notice"><b>ⓘ Alcance del laboratorio</b><span>Las simulaciones son aproximaciones didácticas. No sustituyen el cálculo estructural, el análisis térmico ni una simulación CFD profesional.</span></div>
-    </section>
+    </aside>
 
-    <section class="page" id="page-proyectos">
-      <div class="page-intro"><div><span class="eyebrow">BIBLIOTECA LOCAL</span><h2>Mis proyectos</h2><p>Crea, guarda y recupera tus propuestas en este navegador.</p></div><button class="btn btn-primary" id="newProject">＋ Nuevo proyecto</button></div>
-      <div class="project-grid" id="projectList"></div>
-      <div class="notice"><b>Guardado en este dispositivo</b><span>Los proyectos se almacenan en el navegador mediante almacenamiento local. Para trasladarlos a otra computadora, exporta el archivo JSON desde el proyecto.</span></div>
-    </section>
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menú">☰</button>
+        <div><div class="eyebrow" id="crumb">CENTRO DE CONTROL / RESUMEN</div><h1 id="pageTitle">Panel general</h1></div>
+        <div class="top-actions"><span class="local-tag"><i></i> Entorno de simulación</span><button class="icon-button" id="resetTop" title="Reiniciar simulación">↻</button><div class="avatar">FG</div></div>
+      </header>
 
-    <section class="page" id="page-disenador">
-      <div class="page-intro"><div><span class="eyebrow">MODELO COMPARTIDO</span><h2>Diseñador arquitectónico 3D</h2><p>Selecciona una pieza y modifica sus parámetros. La escena se reconstruye con tus cambios.</p></div><div class="inline-actions"><button class="btn btn-outline" id="resetModel">Restablecer</button><button class="btn btn-primary" id="snapshotBtn">Capturar vista</button></div></div>
-      <div class="workspace">
-        <div class="viewer-card"><div class="viewer-toolbar"><div><b>Vista de modelo</b><small id="viewMode">Perspectiva · órbita libre</small></div><div class="view-buttons"><button class="active" data-view="perspective">3D</button><button data-view="top">Superior</button><button data-view="front">Frontal</button><button data-view="side">Lateral</button></div></div><div id="threeCanvas" class="three-canvas"><div class="loading">Preparando modelo 3D…</div></div><div class="viewer-legend"><span><i class="legend-roof"></i> Cubierta Koch</span><span><i class="legend-panel"></i> Paneles Sierpinski</span><span><i class="legend-support"></i> Soportes ramificados</span></div></div>
-        <div class="control-card"><div class="card-title"><div><span class="eyebrow">PARÁMETROS</span><h3>Configuración</h3></div><span class="live-dot">EN VIVO</span></div>
-          <label>Nombre del proyecto<input id="projectName" value="Refugio BioSombra"></label>
-          <div class="control-section"><b>Dimensiones generales</b><div class="two-fields"><label>Largo (m)<input type="number" id="length" min="2" max="20" step=".5" value="6"></label><label>Ancho (m)<input type="number" id="width" min="2" max="20" step=".5" value="4"></label></div><div class="two-fields"><label>Altura (m)<input type="number" id="height" min="2" max="8" step=".2" value="3.2"></label><label>Soportes<input type="number" id="supports" min="2" max="12" step="1" value="4"></label></div></div>
-          <div class="control-section"><b>Geometría fractal</b><label>Iteraciones Koch <output id="kochOut">2</output><input type="range" id="koch" min="0" max="3" value="2"></label><label>Iteraciones Sierpinski <output id="sierOut">2</output><input type="range" id="sier" min="0" max="4" value="2"></label><label>Niveles de árbol <output id="treeOut">3</output><input type="range" id="tree" min="1" max="5" value="3"></label></div>
-          <div class="control-section"><b>Acabados</b><label>Material<select id="material"><option value="wood">Madera laminada</option><option value="bamboo">Bambú</option><option value="steel">Acero pintado</option></select></label><label>Orientación<input type="range" id="orientation" min="0" max="359" value="0"><output id="orientationOut">0°</output></label></div>
-          <button class="btn btn-primary full" id="applyDesign">Actualizar estructura 3D</button>
+      <section class="view active" id="view-dashboard">
+        <div class="welcome-row"><div class="welcome-copy"><div class="eyebrow green">MONITOREO INTELIGENTE DE ECOSISTEMAS</div><h2>Protege el bosque con <em>matemática.</em></h2><p>Explora un bosque de ejemplo, visualiza sensores y diseña una distribución estratégica con patrones fractales.</p><button class="primary-btn" data-goto="terrain">Explorar bosque <b>→</b></button></div><div class="welcome-forest-image"><img src="assets/forest-default.png" alt="Vista aérea de un bosque tropical"><span>TERRENO DE DEMOSTRACIÓN · BOSQUE TROPICAL</span></div></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Sensores activos</span><span class="stat-icon">⌖</span></div><strong id="dashSensors">24</strong><small id="dashSensorSub">Distribuidos en el terreno</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Cobertura estimada</span><span class="stat-icon">◉</span></div><strong id="dashCoverage">--%</strong><small>Superficie vigilada</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Zonas sin vigilancia</span><span class="stat-icon orange">△</span></div><strong id="dashUncovered">--</strong><small>Sectores que requieren atención</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Inversión estimada</span><span class="stat-icon">S/</span></div><strong id="dashCost">--</strong><small>Según sensores utilizados</small></article>
         </div>
-      </div>
-      <div class="metrics-row" id="designMetrics"></div>
-    </section>
+        <div class="dashboard-grid">
+          <article class="panel map-panel"><div class="panel-heading"><div><span class="eyebrow">VISTA ESPACIAL</span><h3>Mapa del bosque</h3></div><span class="live-pill"><i></i> SIMULACIÓN</span></div><div class="map-wrap"><svg id="dashboardMap" viewBox="0 0 700 390" role="img" aria-label="Mapa simulado del bosque"></svg></div><div class="map-legend"><span><i class="dot covered"></i> Sensor</span><span><i class="dot low"></i> Riesgo bajo</span><span><i class="dot medium"></i> Riesgo medio</span><span><i class="dot high"></i> Riesgo alto</span></div></article>
+          <article class="panel quick-panel"><div class="panel-heading"><div><span class="eyebrow">ESTADO DEL SISTEMA</span><h3>Resumen de simulación</h3></div><span class="subtle">EN VIVO</span></div><div class="quick-list"><div><span class="quick-icon">⌘</span><span><b>Patrón seleccionado</b><small id="dashPattern">Árbol fractal</small></span><strong class="quick-value" id="dashLevel">Nivel 3</strong></div><div><span class="quick-icon">◉</span><span><b>Alcance del sensor</b><small>Radio de cobertura</small></span><strong class="quick-value" id="dashRange">12 u.</strong></div><div><span class="quick-icon">△</span><span><b>Nivel de riesgo</b><small>Condición configurada</small></span><strong class="quick-value" id="dashRisk">Medio</strong></div></div><div class="notice-box"><span>✦</span><p><b>Simulación académica</b><br>Los valores representan un escenario generado localmente; no detectan incendios reales.</p></div><button class="text-btn" data-goto="coverage">Ver análisis de cobertura →</button></article>
+        </div>
+        <div class="bottom-grid"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">MATEMÁTICA DISCRETA</span><h3>Conceptos aplicados</h3></div></div><div class="concept-grid"><div><b>01</b><strong>Recursividad</strong><small>Construcción de fractales por llamadas repetidas.</small></div><div><b>02</b><strong>Recurrencias</strong><small>Crecimiento de elementos en cada nivel.</small></div><div><b>03</b><strong>Árboles</strong><small>Estructura jerárquica de llamadas.</small></div><div><b>04</b><strong>Grafos</strong><small>Sensores como vértices y enlaces como aristas.</small></div><div><b>05</b><strong>Vecino cercano</strong><small>Búsqueda por distancia euclidiana.</small></div></div></article></div>
+      </section>
 
-    <section class="page" id="page-fractales">
-      <div class="page-intro"><div><span class="eyebrow">GENERADORES GEOMÉTRICOS</span><h2>Generador de fractales</h2><p>Construye cada patrón y observa cómo cambia su geometría.</p></div><button class="btn btn-primary" id="combineBtn">Generar estructura fractal ↗</button></div>
-      <div class="fractal-tabs"><button class="active" data-fractal="koch">01 · Curva de Koch</button><button data-fractal="sier">02 · Sierpinski</button><button data-fractal="tree">03 · Árbol fractal</button></div>
-      <div class="fractal-layout"><div class="fractal-visual"><div class="visual-top"><b id="fractalName">Cubierta · Curva de Koch</b><span class="pill">VISTA MATEMÁTICA</span></div><canvas id="fractalCanvas" width="800" height="520"></canvas><div class="visual-foot" id="fractalFormula">D = log(4) / log(3) ≈ 1.262</div></div>
-        <div class="control-card fractal-controls"><span class="eyebrow">PARÁMETROS</span><h3 id="fractalTitle">Curva de Koch</h3><label>Iteraciones <output id="fractalIterOut">2</output><input type="range" id="fractalIter" min="0" max="4" value="2"></label><label>Tamaño inicial (m)<input type="range" id="fractalSize" min="2" max="12" value="6"><output id="fractalSizeOut">6 m</output></label><div class="stats-list" id="fractalStats"></div><p class="small-muted" id="fractalDescription"></p></div></div>
-    </section>
+      <section class="view" id="view-terrain">
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO DE TERRENO VISUAL</span><h2>Explora el bosque</h2><p>La página ya incluye una imagen aérea de demostración con sensores y zonas de riesgo simuladas. Puedes cambiarla si lo deseas.</p></div><span class="step-chip">BOSQUE INCLUIDO</span></div>
+        <div class="terrain-grid">
+          <article class="panel terrain-panel">
+            <div class="panel-heading"><div><span class="eyebrow">MODO 01 · BOSQUE DE DEMOSTRACIÓN</span><h3>Imagen aérea del terreno</h3><p>Esta imagen ya viene incluida en FORESTGUARD. Los marcadores muestran un ejemplo de vigilancia.</p></div><span class="panel-symbol">▧</span></div>
+            <label class="upload-zone optional-upload" for="forestImageInput"><span class="upload-icon">＋</span><b>Opcional: usar otra imagen</b><small>Solo si deseas reemplazar el bosque de demostración</small><input id="forestImageInput" type="file" accept="image/png,image/jpeg,image/webp"></label>
+            <div class="image-toolbar"><label class="check-control"><input type="checkbox" id="riskMarkMode"> Marcar zonas de riesgo al tocar la imagen</label><button class="small-btn" id="clearRiskMarks" type="button">Limpiar marcas</button></div>
+            <div class="uploaded-stage" id="uploadedStage"><div class="empty-upload"><span>🌲</span><b>Cargando bosque de demostración…</b><small>La imagen incluida aparecerá aquí automáticamente.</small></div><svg id="uploadedOverlay" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-label="Imagen del bosque con puntos de análisis"><image id="uploadedImage" x="0" y="0" width="1000" height="620" preserveAspectRatio="none"/><g id="riskMarkers"></g><g id="imageSensorMarkers"></g></svg></div>
+            <div class="map-legend"><span><i class="dot covered"></i> Sensores</span><span><i class="dot high"></i> Zonas marcadas como riesgo</span></div>
+            <p class="terrain-note" id="imageStatus">Bosque de demostración incluido. Los puntos de riesgo y sensores son ejemplos simulados, no detecciones automáticas.</p>
+          </article>
+          <article class="panel terrain-panel">
+            <div class="panel-heading"><div><span class="eyebrow">MODO 02 · MAPA INTERACTIVO</span><h3>Explorar una ubicación</h3><p>El mapa inicia mostrando una zona de referencia en la Amazonía peruana. Puedes moverlo y elegir otro punto.</p></div><span class="panel-symbol">◎</span></div>
+            <div class="map-actions"><button class="small-btn" id="locateMe" type="button">◎ Usar mi ubicación</button><button class="small-btn" id="resetMapView" type="button">Restablecer mapa</button></div>
+            <div id="realMap" class="real-map" role="application" aria-label="Mapa interactivo de OpenStreetMap"></div>
+            <div class="coordinates-card"><div><small>UBICACIÓN SELECCIONADA</small><b id="selectedCoordinates">Haz clic en el mapa</b></div><button class="small-btn" id="copyCoordinates" type="button" disabled>Copiar</button></div>
+            <p class="terrain-note">Mapa base: OpenStreetMap. La ubicación se selecciona manualmente o mediante el permiso de ubicación del navegador. No representa detección de incendios.</p>
+          </article>
+        </div>
+        <article class="panel terrain-explainer"><div><span class="eyebrow">CÓMO SE CONECTA CON LA MATEMÁTICA DISCRETA</span><h3>Del terreno a una red de vigilancia</h3></div><div class="terrain-steps"><div><b>01</b><strong>Terreno</strong><small>Imagen o ubicación elegida por el usuario.</small></div><div><b>02</b><strong>Patrón fractal</strong><small>Generación recursiva de puntos candidatos.</small></div><div><b>03</b><strong>Grafo</strong><small>Sensores como vértices y conexiones como aristas.</small></div><div><b>04</b><strong>Cobertura</strong><small>Estimación de sectores alcanzados por sensores.</small></div></div></article>
+      </section>
 
-    <section class="page" id="page-solar">
-      <div class="page-intro"><div><span class="eyebrow">ANÁLISIS DE ASOLEAMIENTO</span><h2>Simulador solar y de sombras</h2><p>La posición solar modifica la iluminación y la sombra proyectada en el modelo.</p></div><span class="pill">MODELO SOLAR SIMPLIFICADO</span></div>
-      <div class="simulation-grid"><div class="viewer-card"><div class="viewer-toolbar"><div><b>Escena solar 3D</b><small>La dirección de la luz responde a la hora seleccionada</small></div><button class="btn btn-outline" id="playSun">▶ Recorrer día</button></div><div id="solarCanvas" class="three-canvas solar-view"></div><div class="sun-controls"><label>Hora del día <output id="hourOut">12:00</output><input type="range" id="solarHour" min="6" max="18" step=".25" value="12"></label><label>Latitud<input type="number" id="latitude" value="-12.05" step=".01"></label><label>Fecha<input type="date" id="solarDate" value="2026-11-25"></label></div></div>
-        <div class="control-card"><span class="eyebrow">RESULTADOS</span><h3>Protección solar</h3><div class="big-metric"><strong id="shadePercent">—</strong><span>% de sombra estimada</span></div><div class="progress"><i id="shadeBar"></i></div><div class="stats-list"><div><span>Superficie evaluada</span><b id="evalArea">24.0 m²</b></div><div><span>Superficie protegida</span><b id="protectedArea">—</b></div><div><span>Superficie expuesta</span><b id="exposedArea">—</b></div><div><span>Elevación solar aprox.</span><b id="sunElevation">—</b></div><div><span>Longitud sombra guía</span><b id="shadowLength">—</b></div></div><div class="notice compact"><b>Interpretación</b><span id="solarInterpretation">Ajusta la hora para observar los cambios.</span></div></div></div>
-      <div class="card simple-card"><h3>Comparación horaria</h3><div class="comparison-bars" id="hourBars"></div></div>
-    </section>
+      <section class="view" id="view-forest">
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO 01</span><h2>Configura tu escenario</h2><p>Define las características del terreno y los recursos disponibles para la simulación.</p></div><span class="step-chip">01 / 05</span></div>
+        <div class="config-layout"><article class="panel form-panel"><div class="panel-heading"><div><h3>Parámetros del bosque</h3><p>Personaliza las condiciones iniciales</p></div><span class="panel-symbol">⚙</span></div>
+          <div class="field-grid"><label>Anchura del terreno <div class="input-unit"><input id="widthInput" type="number" min="20" max="200" value="100"><span>unidades</span></div></label><label>Altura del terreno <div class="input-unit"><input id="heightInput" type="number" min="20" max="200" value="70"><span>unidades</span></div></label><label>Sensores disponibles <div class="input-unit"><input id="sensorInput" type="number" min="1" max="100" value="24"><span>unidades</span></div></label><label>Presupuesto disponible <div class="input-unit"><span class="currency">S/</span><input id="budgetInput" type="number" min="0" step="100" value="5000"></div></label><label>Nivel de riesgo <select id="riskInput"><option value="low">Bajo</option><option value="medium" selected>Medio</option><option value="high">Alto</option></select></label><label>Alcance de cada sensor <div class="input-unit"><input id="rangeInput" type="number" min="3" max="30" value="12"><span>unidades</span></div></label></div>
+          <div class="field-note"><span>ⓘ</span> El terreno se representa como una cuadrícula de sectores para estimar la cobertura.</div><button class="primary-btn full" id="generateForest">Generar bosque <b>→</b></button>
+        </article><article class="panel preview-panel"><div class="panel-heading"><div><h3>Vista previa del terreno</h3><p>Representación esquemática del área</p></div><span class="live-pill"><i></i> PREVIEW</span></div><div class="preview-stage"><svg id="forestPreview" viewBox="0 0 600 370" role="img" aria-label="Vista previa del terreno"></svg></div><div class="dimension-row"><span>ÁREA TOTAL</span><b id="areaLabel">7,000 u²</b></div></article></div>
+      </section>
 
-    <section class="page" id="page-ventilacion">
-      <div class="page-intro"><div><span class="eyebrow">FLUJO A TRAVÉS DE ABERTURAS</span><h2>Simulador de ventilación</h2><p>Compara el área abierta de los paneles y estima el caudal a través de ellos.</p></div><span class="pill">ESTIMACIÓN SIMPLIFICADA</span></div>
-      <div class="simulation-grid"><div class="air-card"><div class="air-scene"><div class="air-roof"></div><div class="air-panel"><span></span><span></span><span></span><span></span><span></span></div><div class="air-arrows"><i>➜</i><i>➜</i><i>➜</i><i>➜</i></div><div class="air-ground"></div></div><div class="air-caption"><b>Flujo conceptual a través del panel</b><span>Las flechas representan dirección, no un campo CFD.</span></div></div>
-        <div class="control-card"><span class="eyebrow">CONDICIONES DE VIENTO</span><h3>Parámetros de entrada</h3><label>Velocidad del viento <output id="windOut">3.0 m/s</output><input type="range" id="windSpeed" min="0" max="15" step=".5" value="3"></label><label>Área efectiva de abertura <output id="openOut">5.8 m²</output><input type="range" id="openArea" min="0" max="20" step=".2" value="5.8"></label><label>Coeficiente de descarga Cd<input type="number" id="cd" min=".1" max="1" step=".05" value="0.62"></label><label>Diferencia de presión ΔCp<input type="number" id="dcp" min=".1" max="2" step=".1" value="0.8"></label><div class="big-metric"><strong id="flowResult">—</strong><span>m³/s · caudal estimado</span></div><div class="stats-list"><div><span>Presión dinámica estimada</span><b id="pressureResult">—</b></div><div><span>Porosidad Sierpinski</span><b id="porosityResult">—</b></div><div><span>Tipo de modelo</span><b>Orificio simplificado</b></div></div></div></div>
-      <div class="notice"><b>Modelo utilizado</b><span>Q = Cd × A × √(2ΔP/ρ), con ΔP = 0.5 × ρ × v² × ΔCp y ρ = 1.225 kg/m³. Estima el flujo a través de una abertura; no resuelve el viento alrededor de la estructura.</span></div>
-    </section>
+      <section class="view" id="view-fractals">
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO 02</span><h2>Simulador de fractales</h2><p>Observa cómo una regla sencilla repetida recursivamente produce estructuras complejas.</p></div><span class="step-chip">02 / 05</span></div>
+        <div class="fract-controls panel"><div class="control-block"><label for="patternSelect">Patrón matemático</label><select id="patternSelect"><option value="tree">Árbol fractal</option><option value="sierpinski">Triángulo de Sierpinski</option><option value="grid">Cuadrícula fractal</option></select></div><div class="control-block range-control"><div class="range-label"><label for="depthInput">Nivel de recursividad</label><strong id="depthValue">3</strong></div><input id="depthInput" type="range" min="1" max="6" value="3"><div class="range-scale"><span>1 · Inicial</span><span>6 · Complejo</span></div></div><button class="primary-btn" id="generateFractal">Generar patrón <b>✳</b></button></div>
+        <div class="fract-layout"><article class="panel fract-canvas-panel"><div class="panel-heading"><div><span class="eyebrow">RENDERIZADO RECURSIVO</span><h3 id="fractalTitle">Árbol fractal</h3></div><span class="subtle" id="fractalCount">-- elementos</span></div><div class="fractal-stage"><svg id="fractalCanvas" viewBox="0 0 700 430" role="img" aria-label="Visualización del patrón fractal"></svg></div><div class="canvas-foot"><span><i class="dot fract-dot"></i> Elementos generados</span><span id="recurrenceText">T(n) = 2T(n−1) + 1</span></div></article><article class="panel explanation-panel"><span class="eyebrow">¿CÓMO FUNCIONA?</span><h3 id="explainTitle">Árbol fractal</h3><p id="explainText">Cada rama genera dos nuevas ramas hasta alcanzar el nivel base. La misma función se llama a sí misma con menor profundidad.</p><div class="formula-card"><small>REGLA DE RECURRENCIA</small><strong id="formula">T(n) = 2T(n−1) + 1</strong><small id="formulaDetail">T(0) = 1</small></div><div class="mini-stat"><span>Elementos en este nivel</span><b id="elementCount">15</b></div></article></div>
+        <div class="math-grid"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">CRECIMIENTO</span><h3>Tabla de recurrencia</h3></div></div><div class="table-wrap"><table><thead><tr><th>Nivel n</th><th>Elementos T(n)</th><th>Crecimiento</th></tr></thead><tbody id="recurrenceTable"></tbody></table></div></article><article class="panel"><div class="panel-heading"><div><span class="eyebrow">ESTRUCTURA RECURSIVA</span><h3>Árbol de llamadas</h3></div></div><div class="call-tree" id="callTree"></div><small class="muted">Cada nodo representa una llamada de la función recursiva.</small></article></div>
+      </section>
 
-    <section class="page" id="page-confort">
-      <div class="page-intro"><div><span class="eyebrow">ESCENARIO AMBIENTAL</span><h2>Confort ambiental</h2><p>Combina resultados geométricos con condiciones ambientales que tú introduces.</p></div></div>
-      <div class="comfort-grid"><div class="control-card"><span class="eyebrow">DATOS DE ENTRADA</span><h3>Condiciones del entorno</h3><label>Temperatura del aire (°C)<input type="number" id="airTemp" value="29" min="-10" max="55"></label><label>Humedad relativa (%)<input type="number" id="humidity" value="65" min="0" max="100"></label><label>Velocidad del viento (m/s)<input type="number" id="comfortWind" value="3" min="0" max="20" step=".1"></label><label>Radiación solar de escenario (W/m²)<input type="number" id="radiation" value="650" min="0" max="1200" step="10"></label><button class="btn btn-primary full" id="calcComfort">Actualizar indicadores</button></div><div class="comfort-results"><div class="metric-card"><small>SOMBRA ESTIMADA</small><b id="comfortShade">—</b><span>del área evaluada</span></div><div class="metric-card"><small>CAUDAL ESTIMADO</small><b id="comfortFlow">—</b><span>m³/s a través de aberturas</span></div><div class="metric-card"><small>TEMPERATURA DEL AIRE</small><b id="comfortTemp">29 °C</b><span>dato introducido por el usuario</span></div><div class="metric-card"><small>HUMEDAD RELATIVA</small><b id="comfortHumidity">65%</b><span>dato introducido por el usuario</span></div><div class="notice"><b>Lectura responsable</b><span>La sombra reduce la exposición directa a la radiación, pero no implica una reducción automática de la temperatura del aire. No se calcula temperatura superficial ni sensación térmica en esta versión.</span></div></div></div>
-    </section>
+      <section class="view" id="view-sensors">
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO 03</span><h2>Distribución de sensores</h2><p>Ubica sensores en el bosque, inspecciona sus datos y analiza las conexiones del grafo.</p></div><span class="step-chip">03 / 05</span></div>
+        <div class="toolbar panel"><label>Patrón de distribución<select id="sensorPattern"><option value="tree">Árbol fractal</option><option value="sierpinski">Sierpinski</option><option value="grid">Cuadrícula fractal</option></select></label><label>Número de sensores<input id="sensorCount" type="number" min="1" max="100" value="24"></label><button class="primary-btn" id="placeSensors">Distribuir sensores <b>⌖</b></button></div>
+        <div class="sensor-layout"><article class="panel sensor-map-panel"><div class="panel-heading"><div><span class="eyebrow">MAPA DE NODOS</span><h3>Red de sensores</h3></div><span class="subtle" id="graphSummary">0 vértices · 0 aristas</span></div><div class="sensor-stage"><svg id="sensorMap" viewBox="0 0 700 430" role="img" aria-label="Mapa de sensores conectados"></svg></div><div class="map-legend"><span><i class="dot covered"></i> Sensor normal</span><span><i class="dot high"></i> Zona de riesgo</span><span>— Conexión</span></div></article><article class="panel sensor-info"><div class="panel-heading"><div><span class="eyebrow">INSPECTOR DE NODO</span><h3>Información del sensor</h3></div></div><div id="sensorDetails" class="empty-state"><span>⌖</span><b>Selecciona un sensor</b><small>Haz clic en un punto del mapa para consultar sus propiedades.</small></div><div class="divider"></div><div class="nearest-box"><span class="eyebrow">ALGORITMO DE VECINO MÁS CERCANO</span><p>Haz clic en cualquier punto del mapa para encontrar el sensor más próximo.</p><div class="nearest-result" id="nearestResult">Esperando un punto de consulta…</div></div></article></div>
+        <article class="panel graph-panel"><div class="panel-heading"><div><span class="eyebrow">TEORÍA DE GRAFOS</span><h3>Conectividad de la red</h3></div><span class="subtle">G = (V, E)</span></div><div class="graph-metrics"><div><small>VÉRTICES | V</small><b id="vertexCount">0</b></div><div><small>ARISTAS | E</small><b id="edgeCount">0</b></div><div><small>GRADO PROMEDIO</small><b id="avgDegree">0</b></div><div><small>COMPONENTES</small><b id="componentCount">0</b></div></div><p class="muted">Dos sensores se conectan si la distancia entre ellos no supera el umbral de conexión (1.8 × alcance). Las aristas se recalculan al redistribuir.</p></article>
+      </section>
 
-    <section class="page" id="page-comparador">
-      <div class="page-intro"><div><span class="eyebrow">EVALUACIÓN DE ALTERNATIVAS</span><h2>Comparador de diseños</h2><p>Contrasta tres configuraciones bajo los mismos parámetros ambientales.</p></div><button class="btn btn-primary" id="refreshCompare">Actualizar comparación</button></div>
-      <div class="compare-grid" id="compareGrid"></div>
-      <div class="card simple-card"><h3>Indicadores comparativos</h3><div id="compareBars"></div></div>
-      <div class="notice"><b>Sin ganador automático</b><span>La alternativa más adecuada depende de tus prioridades, condiciones del lugar y validaciones técnicas posteriores.</span></div>
-    </section>
+      <section class="view" id="view-coverage">
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO 04</span><h2>Análisis de cobertura</h2><p>Identifica sectores vigilados y áreas que requieren mayor atención.</p></div><span class="step-chip">04 / 05</span></div>
+        <div class="coverage-top"><div class="coverage-kpi panel"><small>COBERTURA TOTAL</small><strong id="coveragePercent">--%</strong><div class="progress"><i id="coverageBar"></i></div><span id="coverageCaption">Calculando superficie vigilada</span></div><div class="risk-kpi panel"><small>SECTORES DE RIESGO ALTO</small><strong id="highRiskCount">--</strong><span>Prioridad de atención</span></div><div class="risk-kpi panel"><small>SECTORES SIN COBERTURA</small><strong id="uncoveredCount">--</strong><span>Sin sensor dentro del alcance</span></div></div>
+        <div class="coverage-layout"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">MAPA TÉRMICO SIMULADO</span><h3>Distribución de cobertura</h3></div><button class="small-btn" id="refreshCoverage">Actualizar mapa</button></div><div class="coverage-stage"><svg id="coverageMap" viewBox="0 0 700 430" role="img" aria-label="Mapa de cobertura del bosque"></svg></div><div class="map-legend"><span><i class="dot low"></i> Riesgo bajo</span><span><i class="dot medium"></i> Riesgo medio</span><span><i class="dot high"></i> Riesgo alto</span><span><i class="dot uncovered"></i> Sin vigilancia</span></div></article><article class="panel risk-panel"><div class="panel-heading"><div><span class="eyebrow">LECTURA DEL ESCENARIO</span><h3>Estado por sectores</h3></div></div><div class="risk-row"><span><i class="dot low"></i> Riesgo bajo</span><b id="lowZones">0</b></div><div class="risk-row"><span><i class="dot medium"></i> Riesgo medio</span><b id="mediumZones">0</b></div><div class="risk-row"><span><i class="dot high"></i> Riesgo alto</span><b id="highZones">0</b></div><div class="risk-row"><span><i class="dot uncovered"></i> Sin vigilancia</span><b id="uncoveredZones">0</b></div><div class="alert-box" id="riskAlert"><b>Escenario simulado</b><p>Los niveles de riesgo son parámetros académicos, no mediciones ambientales reales.</p></div></article></div>
+      </section>
 
-    <section class="page" id="page-optimizador">
-      <div class="page-intro"><div><span class="eyebrow">EXPLORACIÓN DE ALTERNATIVAS</span><h2>Optimizador de diseño</h2><p>Explora combinaciones discretas de parámetros y revisa sus indicadores estimados.</p></div></div>
-      <div class="optimizer-layout"><div class="control-card"><span class="eyebrow">TUS PRIORIDADES</span><h3>Objetivos de diseño</h3><label>Prioridad de sombra <output id="wShadeOut">50%</output><input type="range" id="wShade" min="0" max="100" value="50"></label><label>Prioridad de ventilación <output id="wAirOut">30%</output><input type="range" id="wAir" min="0" max="100" value="30"></label><label>Prioridad de ahorro de material <output id="wMatOut">20%</output><input type="range" id="wMat" min="0" max="100" value="20"></label><button class="btn btn-primary full" id="runOptimizer">Explorar alternativas</button><p class="small-muted">Se evalúan combinaciones de altura, iteraciones de panel y área abierta con una función de puntuación transparente.</p></div><div class="control-card"><span class="eyebrow">ALTERNATIVAS EVALUADAS</span><h3>Resultados</h3><div id="optimizerResults"><p class="empty-state">Ajusta tus prioridades y ejecuta la exploración para ver propuestas calculadas.</p></div></div></div>
-    </section>
-
-    <section class="page" id="page-laboratorio">
-      <div class="page-intro"><div><span class="eyebrow">MATEMÁTICA APLICADA</span><h2>Laboratorio matemático fractal</h2><p>Experimenta con recursividad, recurrencias y crecimiento geométrico.</p></div></div>
-      <div class="math-grid"><article class="math-card"><span class="math-symbol">K</span><h3>Curva de Koch</h3><div class="equation">D = log(4) / log(3)</div><p>Cada segmento se transforma en cuatro segmentos de un tercio de su longitud.</p><b id="kochMath">Segmentos: 64</b><small>T(n) = 4T(n−1)</small></article><article class="math-card"><span class="math-symbol">△</span><h3>Triángulo de Sierpinski</h3><div class="equation">A(n) = A₀(3/4)ⁿ</div><p>En cada nivel quedan tres triángulos semejantes y se retira el central.</p><b id="sierMath">Triángulos: 9</b><small>T(n) = 3T(n−1)</small></article><article class="math-card"><span class="math-symbol">♧</span><h3>Árbol fractal</h3><div class="equation">N(k) = bᵏ</div><p>Las ramas se replican con un factor de reducción de longitud.</p><b id="treeMath">Ramas: 15</b><small>L(k) = L₀ × rᵏ</small></article></div>
-      <div class="card simple-card"><h3>Árbol de llamadas recursivas · esquema</h3><div id="recursionTree" class="recursion-tree"></div><p class="small-muted">Representación conceptual de la expansión recursiva para visualizar cómo se generan los subproblemas.</p></div>
-    </section>
-
-    <section class="page" id="page-informes">
-      <div class="page-intro"><div><span class="eyebrow">DOCUMENTACIÓN DEL PROYECTO</span><h2>Informes y exportación</h2><p>Genera una ficha imprimible, descarga los parámetros o exporta resultados tabulares.</p></div></div>
-      <div class="export-grid"><article class="export-card"><div class="feature-icon green">▤</div><h3>Informe del proyecto</h3><p>Resumen, dimensiones, fractales, indicadores solares y supuestos del modelo.</p><button class="btn btn-primary full" id="printReport">Generar informe / PDF</button><small>Usa la opción “Guardar como PDF” del navegador.</small></article><article class="export-card"><div class="feature-icon blue">⇩</div><h3>Datos en CSV</h3><p>Exporta parámetros y resultados principales para analizarlos en una hoja de cálculo.</p><button class="btn btn-outline full" id="csvBtn">Descargar CSV</button></article><article class="export-card"><div class="feature-icon yellow">{ }</div><h3>Proyecto JSON</h3><p>Guarda una copia editable del proyecto para trasladarlo a otro navegador.</p><button class="btn btn-outline full" id="jsonBtn">Exportar proyecto</button><label class="file-label">Importar proyecto JSON<input type="file" id="importJson" accept=".json,application/json"></label></article></div>
-      <div class="notice"><b>Contenido del informe</b><span>Nombre, dimensiones, materiales, parámetros fractales, estimación de sombra, caudal de aire, indicadores disponibles y limitaciones. Para añadir vistas 3D, utiliza “Capturar vista” en el diseñador.</span></div>
-    </section>
-
-    <footer class="footer"><span> ECOFRACTAL · Laboratorio de Diseño Arquitectónico Fractal</span><span>Modelo conceptual · No sustituye validación profesional</span></footer>
-  </main>
-</div>
-<div class="toast" id="toast"></div>
-<script type="module" src="app.js"></script>
+      <section class="view" id="view-budget">
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO 05</span><h2>Presupuesto y resultados</h2><p>Evalúa el costo de implementación y compara el desempeño de los patrones.</p></div><span class="step-chip">05 / 05</span></div>
+        <div class="budget-summary"><article class="budget-total panel"><small>COSTO TOTAL ESTIMADO</small><strong id="totalCost">S/ 0.00</strong><span id="budgetStatus">Dentro del presupuesto</span></article><article class="budget-stat panel"><small>SENSORES UTILIZADOS</small><b id="usedSensors">0</b><span>unidades</span></article><article class="budget-stat panel"><small>COSTO POR SENSOR</small><b id="unitCost">S/ 150</b><span>costo referencial</span></article><article class="budget-stat panel"><small>PRESUPUESTO RESTANTE</small><b id="remainingBudget">S/ 0</b><span>disponible</span></article></div>
+        <div class="results-layout"><article class="panel comparison-panel"><div class="panel-heading"><div><span class="eyebrow">COMPARACIÓN DE PATRONES</span><h3>Rendimiento estimado</h3></div><button class="primary-btn compact" id="compareBtn">Comparar resultados</button></div><div class="chart-wrap"><canvas id="comparisonChart" width="700" height="300" aria-label="Gráfico comparativo"></canvas></div><div class="table-wrap"><table><thead><tr><th>Patrón</th><th>Elementos</th><th>Cobertura</th><th>Costo</th></tr></thead><tbody id="comparisonTable"></tbody></table></div></article><article class="panel results-panel"><div class="panel-heading"><div><span class="eyebrow">RESUMEN DE IMPLEMENTACIÓN</span><h3>Indicadores clave</h3></div></div><div class="result-line"><span>Porcentaje de cobertura</span><b id="resultCoverage">--%</b></div><div class="result-line"><span>Zonas sin vigilancia</span><b id="resultUncovered">--</b></div><div class="result-line"><span>Presupuesto disponible</span><b id="resultBudget">--</b></div><div class="result-line"><span>Patrón actual</span><b id="resultPattern">--</b></div><div class="result-note">Los costos son referenciales y pueden modificarse en el código fuente para adaptarlos al proyecto.</div><button class="outline-btn full" id="resetSimulation">↻ Reiniciar simulación</button></article></div>
+        <article class="panel foundation"><div class="panel-heading"><div><span class="eyebrow">BASE TEÓRICA</span><h3>Fundamento matemático</h3></div></div><div class="foundation-grid"><div><b>01 · Recursividad</b><p>Una función se define en términos de sí misma y reduce el problema hasta llegar a un caso base. En FORESTGUARD se usa para dibujar ramas, triángulos y subdivisiones.</p></div><div><b>02 · Recurrencias</b><p>Una relación de recurrencia expresa el número de elementos de un nivel a partir de niveles anteriores. Permite estimar el crecimiento del patrón.</p></div><div><b>03 · Árboles</b><p>El árbol de llamadas organiza las invocaciones recursivas en raíz, nodos hijos y hojas. Cada nivel representa una profundidad.</p></div><div><b>04 · Grafos</b><p>La red de sensores es un grafo G = (V, E): los sensores son vértices y las conexiones por proximidad son aristas.</p></div><div><b>05 · Vecino más cercano</b><p>Para un punto P se calcula la distancia euclidiana a cada sensor y se elige el mínimo: d = √((x₂−x₁)² + (y₂−y₁)²).</p></div></div></article>
+      </section>
+      <footer class="footer"><span>FORESTGUARD · Laboratorio de simulación</span><span>Una herramienta académica de Matemática Discreta</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="script.js"></script>
 </body>
 </html>
