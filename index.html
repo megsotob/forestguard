@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
   <div class="app-shell">
@@ -20,6 +21,7 @@
       <div class="side-label">PLATAFORMA</div>
       <nav class="navigation" aria-label="Navegación principal">
         <button class="nav-item active" data-view="dashboard"><span>◫</span> Panel general</button>
+        <button class="nav-item" data-view="terrain"><span>⌖</span> Imagen y mapa real</button>
         <button class="nav-item" data-view="forest"><span>▧</span> Configuración del bosque</button>
         <button class="nav-item" data-view="fractals"><span>✳</span> Simulador de fractales</button>
         <button class="nav-item" data-view="sensors"><span>⌖</span> Distribución de sensores</button>
@@ -52,6 +54,28 @@
           <article class="panel quick-panel"><div class="panel-heading"><div><span class="eyebrow">ESTADO DEL SISTEMA</span><h3>Resumen de simulación</h3></div><span class="subtle">EN VIVO</span></div><div class="quick-list"><div><span class="quick-icon">⌘</span><span><b>Patrón seleccionado</b><small id="dashPattern">Árbol fractal</small></span><strong class="quick-value" id="dashLevel">Nivel 3</strong></div><div><span class="quick-icon">◉</span><span><b>Alcance del sensor</b><small>Radio de cobertura</small></span><strong class="quick-value" id="dashRange">12 u.</strong></div><div><span class="quick-icon">△</span><span><b>Nivel de riesgo</b><small>Condición configurada</small></span><strong class="quick-value" id="dashRisk">Medio</strong></div></div><div class="notice-box"><span>✦</span><p><b>Simulación académica</b><br>Los valores representan un escenario generado localmente; no detectan incendios reales.</p></div><button class="text-btn" data-goto="coverage">Ver análisis de cobertura →</button></article>
         </div>
         <div class="bottom-grid"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">MATEMÁTICA DISCRETA</span><h3>Conceptos aplicados</h3></div></div><div class="concept-grid"><div><b>01</b><strong>Recursividad</strong><small>Construcción de fractales por llamadas repetidas.</small></div><div><b>02</b><strong>Recurrencias</strong><small>Crecimiento de elementos en cada nivel.</small></div><div><b>03</b><strong>Árboles</strong><small>Estructura jerárquica de llamadas.</small></div><div><b>04</b><strong>Grafos</strong><small>Sensores como vértices y enlaces como aristas.</small></div><div><b>05</b><strong>Vecino cercano</strong><small>Búsqueda por distancia euclidiana.</small></div></div></article></div>
+      </section>
+
+      <section class="view" id="view-terrain">
+        <div class="section-intro"><div><span class="eyebrow green">MÓDULO DE TERRENO REAL</span><h2>Explora tu zona forestal</h2><p>Sube una imagen aérea para ubicar sensores o selecciona una ubicación en el mapa.</p></div><span class="step-chip">NUEVO</span></div>
+        <div class="terrain-grid">
+          <article class="panel terrain-panel">
+            <div class="panel-heading"><div><span class="eyebrow">MODO 01 · IMAGEN PROPIA</span><h3>Analizar una fotografía</h3><p>Admite fotografías aéreas, capturas satelitales o imágenes del terreno.</p></div><span class="panel-symbol">▧</span></div>
+            <label class="upload-zone" for="forestImageInput"><span class="upload-icon">＋</span><b>Seleccionar imagen del bosque</b><small>JPG, PNG o WEBP · La imagen se procesa en tu navegador</small><input id="forestImageInput" type="file" accept="image/png,image/jpeg,image/webp"></label>
+            <div class="image-toolbar"><label class="check-control"><input type="checkbox" id="riskMarkMode"> Marcar zonas de riesgo al tocar la imagen</label><button class="small-btn" id="clearRiskMarks" type="button">Limpiar marcas</button></div>
+            <div class="uploaded-stage" id="uploadedStage"><div class="empty-upload"><span>🌲</span><b>Tu imagen aparecerá aquí</b><small>Después podrás seleccionar puntos de riesgo y ver la ubicación simulada de los sensores.</small></div><svg id="uploadedOverlay" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-label="Imagen del bosque con puntos de análisis"><image id="uploadedImage" x="0" y="0" width="1000" height="620" preserveAspectRatio="none"/><g id="riskMarkers"></g><g id="imageSensorMarkers"></g></svg></div>
+            <div class="map-legend"><span><i class="dot covered"></i> Sensores</span><span><i class="dot high"></i> Zonas marcadas como riesgo</span></div>
+            <p class="terrain-note" id="imageStatus">La imagen no se envía a ningún servidor; se visualiza localmente en este navegador.</p>
+          </article>
+          <article class="panel terrain-panel">
+            <div class="panel-heading"><div><span class="eyebrow">MODO 02 · MAPA INTERACTIVO</span><h3>Explorar una ubicación</h3><p>Haz clic en el mapa para elegir un punto de referencia.</p></div><span class="panel-symbol">◎</span></div>
+            <div class="map-actions"><button class="small-btn" id="locateMe" type="button">◎ Usar mi ubicación</button><button class="small-btn" id="resetMapView" type="button">Restablecer mapa</button></div>
+            <div id="realMap" class="real-map" role="application" aria-label="Mapa interactivo de OpenStreetMap"></div>
+            <div class="coordinates-card"><div><small>UBICACIÓN SELECCIONADA</small><b id="selectedCoordinates">Haz clic en el mapa</b></div><button class="small-btn" id="copyCoordinates" type="button" disabled>Copiar</button></div>
+            <p class="terrain-note">Mapa base: OpenStreetMap. La ubicación se selecciona manualmente o mediante el permiso de ubicación del navegador. No representa detección de incendios.</p>
+          </article>
+        </div>
+        <article class="panel terrain-explainer"><div><span class="eyebrow">CÓMO SE CONECTA CON LA MATEMÁTICA DISCRETA</span><h3>Del terreno a una red de vigilancia</h3></div><div class="terrain-steps"><div><b>01</b><strong>Terreno</strong><small>Imagen o ubicación elegida por el usuario.</small></div><div><b>02</b><strong>Patrón fractal</strong><small>Generación recursiva de puntos candidatos.</small></div><div><b>03</b><strong>Grafo</strong><small>Sensores como vértices y conexiones como aristas.</small></div><div><b>04</b><strong>Cobertura</strong><small>Estimación de sectores alcanzados por sensores.</small></div></div></article>
       </section>
 
       <section class="view" id="view-forest">
@@ -92,6 +116,7 @@
     </main>
   </div>
   <div class="toast" id="toast" role="status"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="script.js"></script>
 </body>
 </html>
